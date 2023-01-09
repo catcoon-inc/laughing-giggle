@@ -1,0 +1,32 @@
+name: Build
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Build
+        run: |
+          set -eu -o pipefail
+
+          CSPROJ_PATH=./tests
+          REPORTS_FOLDER_PATH=tests-reports
+
+          dotnet test $CSPROJ_PATH \
+              --logger trx \
+              --logger "console;verbosity=detailed" \
+              --settings "runsettings.xml" \
+              --results-directory $REPORTS_FOLDER_PATH
+      - name: Save PR number
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.number }} > ./pr/NR
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pr
+          path: tests-reports/
