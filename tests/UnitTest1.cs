@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace AspnetTemplate.Tests;
+namespace LaughingGiggle.Tests;
 
 public class UnitTest1
 {

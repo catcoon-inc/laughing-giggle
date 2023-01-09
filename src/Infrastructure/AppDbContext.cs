@@ -1,7 +1,7 @@
-﻿using AspnetTemplate.Core.Models;
+﻿using LaughingGiggle.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AspnetTemplate.Infrastructure;
+namespace LaughingGiggle.Infrastructure;
 
 public class AppDbContext : DbContext
 {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace AspnetTemplate.Migrations
+namespace LaughingGiggle.Migrations
 {
     public partial class Initial : Migration
     {

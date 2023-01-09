@@ -1,4 +1,4 @@
-﻿namespace AspnetTemplate.Core.Models;
+﻿namespace LaughingGiggle.Core.Models;
 
 public class Sample : Entity
 {

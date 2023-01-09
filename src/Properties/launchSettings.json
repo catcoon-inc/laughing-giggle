@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "AspnetTemplate": {
+    "LaughingGiggle": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
