@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using LaughingGiggle.Core.Models;
 
 namespace LaughingGiggle.Tests;
 
