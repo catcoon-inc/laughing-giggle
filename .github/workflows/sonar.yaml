@@ -7,9 +7,6 @@ jobs:
   sonar:
     name: Analyze
     runs-on: windows-latest
-    if: >
-      github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -35,7 +32,28 @@ jobs:
                archive_format: 'zip',
             });
             let fs = require('fs');
-            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/medplum-code-coverage.zip`, Buffer.from(download.data));
-          - run: unzip pr.zip
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/pr.zip`, Buffer.from(download.data));
+      - run: unzip pr.zip -d tests-reports/
 
-          - run: ls
+      - name: Install dotnet-sonarscanner
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+      - name: Build the project, run all tests and publish to SonarCloud
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          PROJECT_VERSION: ${{ github.sha }}
+        run: |
+          set -eu -o pipefail
+
+          dotnet sonarscanner begin \
+              /k:"catcoon-inc_laughing-giggle" \
+              /o:"catcoon-inc" \
+              /d:sonar.login="$SONAR_TOKEN" \
+              /v:"$PROJECT_VERSION" \
+              /d:sonar.host.url="https://sonarcloud.io" \
+              /d:sonar.cs.opencover.reportsPaths="**/*/coverage.opencover.xml" \
+              /d:sonar.cs.vstest.reportsPaths="**/*/*.trx"
+
+          dotnet build
+
+          dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
