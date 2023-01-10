@@ -11,7 +11,7 @@ public class UnitTest1
         var entity = new Entity
         {
             Id = Guid.NewId(),
-            CreatedAt = DateTime.Now()
+            CreatedAt = DateTime.Now
         };
     }
 }
