@@ -1,6 +1,7 @@
 using LaughingGiggle.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
+var x = 1;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
