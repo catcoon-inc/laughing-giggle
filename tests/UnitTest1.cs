@@ -8,9 +8,9 @@ public class UnitTest1
     [Fact]
     public void Test1()
     {
-        var entity = new Entity
+        var entity = new Sample
         {
-            Id = Guid.NewId(),
+            Id = Guid.NewGuid(),
             CreatedAt = DateTime.Now
         };
     }
