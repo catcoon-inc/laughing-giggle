@@ -14,6 +14,6 @@ public class UnitTest1
             Id = Guid.NewGuid(),
             CreatedAt = DateTime.Now
         };
-        Assert.Null(entity);
+        Assert.NotNull(entity);
     }
 }
